@@ -15,7 +15,7 @@ First, instructions which you MUST follow exactly:
 
 ## 1. Experiments Scheduling
 
-You are running a physics experiment with n complicated steps, and students sign-up for some steps to help. Your experiment requires n steps, and each of the m students gives you a list of which steps they can help out with (steps require special skills). From experience, you know things run most smoothly when you have as little switching of shifts as possible.
+You are running a physics experiment with n complicated steps that you must do in order, and students sign-up for some steps to help. Your experiment requires n steps, and each of the m students gives you a list of which steps they can help out with (steps require special skills). From experience, you know things run most smoothly when you have as little switching of shifts as possible.
 
 For example, if your experiment has <1, 2, 3, 4, 5, 6> steps
 * Student 1: <1, 2, 3, 5>
@@ -30,9 +30,9 @@ Another example if your experiment has 8 steps <1, 2, 3, 4, 5, 6, 7, 8>
 * Student 3: <1, 5, 7, 8>
 * Student 4: <1, 3, 4, 8> <br>
 Your optimal solutions could be any one of these: <br>
-  * Student 1 does no steps, Student 2 does <2, 3, 4, 5, 6>, Student 3 does <1, 7, 8>, Student 4 does no steps --> 3 switches <br>
-  *  Student 1 does <7, 8>, Student 2 does <2, 3, 4, 5, 6>, Student 3 does <1>, Student 4 does nothing --> 3 switches <br>
-  * Student 1 does no steps, Student 2 does <2, 3, 4, 5, 6>, Student 3 does <7, 8>, Student 4 does <1> --> 3 switches <br>
+  * Student 1 does no steps, Student 2 does <2, 3, 4, 5, 6>, Student 3 does <1, 7, 8>, Student 4 does no steps --> 2 switches (student 3 does step 1, student 2 does up to 6, student 3 picks up again to do 7 and 8)<br>
+  * Student 1 does <7, 8>, Student 2 does <2, 3, 4, 5, 6>, Student 3 does <1>, Student 4 does nothing --> 2 switches <br>
+  * Student 1 does no steps, Student 2 does <2, 3, 4, 5, 6>, Student 3 does <7, 8>, Student 4 does <1> --> 2 switches <br>
 
 #### Given: n number of steps, m number of students that give you a list of steps (sorted) they can participate in. Assume there's a lookup table where you can find if student X signed up for step Y in O(1), so no need to factor that into your runtime.
 #### Find: An optimal way to schedule students to steps such that there is the least amount of switching as possible.
@@ -65,6 +65,6 @@ Note: If at Y trains arrive at 5:59a, 6:07a, 6:15a, 6:23a, etc. If I make it to 
 #### (d) In the file FastestRoutePublicTransit.java, how would you use the existing code to help you implement your algorithm? The existing code only handles one piece of data per edge, so describe some modifications.
 #### (e) What's the current complexity of "shortestTime" given V vertices and E edges? How would you make the "shortestTime" implementation faster? Describe any algorithm changes or data structure changes. What's the complexity of the optimal implementation?
 #### (g) Code! In the file FastestRoutePublicTransit.java, in the method "myShortestTravelTime", implement the algorithm you described in part (a) using your answers to (d). Don't need to implement the optimal data structure.
-#### (g) Extra credit (15 points): I haven't set up the test cases for "myShortestTravelTime", which takes in 3 matrices. Set up those three matrices to make a test case for your myShortestTravelTime method. Make a call to your method from main passing in the test case you set up.
+#### (g) Extra credit (15 points): I haven't set up the test cases for "myShortestTravelTime", which takes in 3 matrices. Set up those three matrices (first, freq, length) to make a test case for your myShortestTravelTime method. Make a call to your method from main passing in the test case you set up.
 
 #### Turn in: In your write-up file you should have answers to parts: a-e! Coding part f and (optional) g in the file FastestRoutePublicTransit.java
