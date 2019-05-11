@@ -1,7 +1,7 @@
 /**
  * Public Transit
- * Author: Your Name and Carolyn Yao
- * Does this compile? Y/N
+ * Author: Zihao and Carolyn Yao
+ * Does this compile? Y
  */
 
 /**
@@ -34,8 +34,60 @@ public class FastestRoutePublicTransit {
   ) {
     // Your code along with comments here. Feel free to borrow code from any
     // of the existing method. You can also make new helper methods.
-    return 0;
-  }
+	   int numVertices = lengths[0].length;
+
+
+	    int[] times = new int[numVertices];
+
+
+	    Boolean[] processed = new Boolean[numVertices];
+
+
+
+	    for (int v = 0; v < numVertices; v++) {
+	      times[v] = Integer.MAX_VALUE;
+	      processed[v] = false;
+	    }
+
+	    times[S] = 0;
+
+	    int trainPass=0;
+	    int totalTime=0;
+	    for (int count = 0; count < numVertices - 1 ; count++) {
+
+	      startTime=startTime+totalTime; // everytime viste a new node update the start time
+
+	      int u = findNextToProcess(times, processed);
+	      processed[u] = true;
+
+	      for (int v = 0; v < numVertices; v++) {
+
+	        if(!processed[v] && first[u][v]!=0 ){  //if stop can be visted 
+	          trainPass=first[u][v];
+
+	          while(trainPass<startTime){      //get the actual time of train that passenger can take on
+	            trainPass=trainPass+freq[u][v];
+	          }
+
+
+	           int waitTime= trainPass-startTime;   // get the totalweight
+	           totalTime=lengths[u][v]+waitTime;
+
+	        }
+
+	        if (!processed[v] && lengths[u][v]!=0 && times[u] != Integer.MAX_VALUE && times[u]+totalTime < times[v]) {
+
+	          times[v] = times[u] + totalTime;   
+
+	        }
+
+
+	      }
+	    }
+
+
+	    return times[T];
+	  }
 
   /**
    * Finds the vertex with the minimum time from the source that has not been
@@ -122,8 +174,27 @@ public class FastestRoutePublicTransit {
       {0, 0, 2, 0, 0, 0, 6, 7, 0}
     };
     FastestRoutePublicTransit t = new FastestRoutePublicTransit();
-    t.shortestTime(lengthTimeGraph, 0);
+    t.shortestTime(lengthTimeGraph, 1);
+
 
     // You can create a test case for your implemented method for extra credit below
+    int test[][] = new int[][]{
+      {0, 15, 0, 0, 0, 0, 0, 28, 0},
+      {15, 0, 18, 0, 0, 0, 0, 25, 0},
+      {0, 18, 0, 17, 0, 24, 0, 0, 12},
+      {0, 0, 17, 0, 19, 23, 0, 0, 0},
+      {0, 0, 0, 19, 0, 20, 0, 0, 0},
+      {0, 0, 24, 23, 20, 0, 22, 0, 0},
+      {0, 0, 0, 0, 0, 22, 0, 21, 16},
+      {28, 25, 0, 0, 0, 0, 21, 0, 27},
+      {0, 0, 12, 0, 0, 0, 16, 27, 0}
+    };
+
+
+    FastestRoutePublicTransit myTest = new FastestRoutePublicTransit();
+    int shortestTravelTime = myTest.myShortestTravelTime(1, 5, 90, lengthTimeGraph, test, lengthTimeGraph);
+    System.out.print("the shortest time: "+shortestTravelTime+" minutes");
+
+
   }
-}
+ }
